@@ -84,6 +84,7 @@ function buildBubbleChart(data) {
 };
 
 ///**** POPULATE DEMOGRAPHIC INFO ****///
+
 function buildDemoInfo(data) {
     var demoBox = d3.select("#sample-metadata");
     console.log(data)
@@ -94,8 +95,42 @@ function buildDemoInfo(data) {
 };
 
 ///**** BUILD GAUGE ****///
-function buildGauge(data) {
 
+function buildGauge(data) {
+    // Define the variable
+    var w_freq = data.wfreq
+    console.log(w_freq)
+
+    //Plot the data
+    var data = [{
+        domain: { x: [0, 1], y: [0, 1] },
+        value: w_freq,
+        title: { text: "Washing Frequency: Scrubs/Week" },
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+            axis: { range: [null, 9] },
+            steps: [
+                { range: [0, 1], color: "white" },
+                { range: [1, 2], color: "snow" },
+                { range: [2, 3], color: "honeydew" },
+                { range: [3, 4], color: "mintcream" },
+                { range: [4, 5], color: "aliceblue" },
+                { range: [5, 6], color: "whitesmoke" },
+                { range: [6, 7], color: "seashell" },
+                { range: [7, 8], color: "lavenderblush" },
+                { range: [8, 9], color: "mistyrose" }
+            ],
+            threshold: {
+                line: { color: "red", width: 4 },
+                thickness: 0.75,
+                value: 490
+            }
+        }
+    }];
+
+    var layout = { width: 600, height: 450, margin: { t: 0, b: 0 } };
+    Plotly.newPlot('gauge', data, layout);
 }
 
 // Function to change when a new ID is selected
