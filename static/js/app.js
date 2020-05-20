@@ -113,6 +113,8 @@ async function optionChanged(data) {
     })[0]
     console.log(idDemo)
     console.log(idSample);
+    var sample_metadata = d3.select("#sample-metadata");
+    sample_metadata.html("");
     buildBarChart(idSample);
     buildBubbleChart(idSample);
     buildDemoInfo(idDemo);
