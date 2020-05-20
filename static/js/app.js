@@ -76,7 +76,7 @@ function buildBubbleChart(data) {
 
     // Set the layout
     var layout = {
-        title: 'Bubble Chart',
+        title: 'Sample Bubble Chart',
     };
 
     //Plot using plotly
@@ -99,18 +99,19 @@ function buildGauge(data) {
 }
 
 // Function to change when a new ID is selected
-async function optionChanged() {
+async function optionChanged(data) {
     var data = await d3.json("./samples.json");
     console.log(data);
     var selectID = d3.select("#selDataset").node().value;
     console.log(selectID)
     var idSample = data.samples.filter(row => {
-        return row.id === selectID
+        return row.id == selectID
     })[0]
+    console.log(idSample)
     var idDemo = data.metadata.filter(row => {
-        return row.id === selectID
+        return row.id == +selectID
     })[0]
-    sample_metadata.html("");
+    console.log(idDemo)
     console.log(idSample);
     buildBarChart(idSample);
     buildBubbleChart(idSample);

@@ -43,3 +43,42 @@ var url = "https://raw.githubusercontent.com/the-Coding-Boot-Camp-at-UT/UT-MCC-D
 sorted_values = s_sample_values
     .sort(function(a, b) { return a - b })
     .slice(0, 10)
+
+
+sample_values = parseInt(data.sample_values)
+console.log(sample_values)
+sorted = sample_values.sort((a, b) => a - b)
+console.log(sorted)
+
+
+Define variables
+
+function top10(data) {
+    return parseInt(data.sample_values).sort().reverse();
+}
+var top10 = data.filter(top10);
+console.log(top10);
+
+
+
+PRERAK
+async function optionChanged(data) {
+    var data = await d3.json("./samples.json");
+    console.log(data);
+    var selectID = d3.select("#selDataset").node().value;
+    console.log(selectID)
+    var filteredData = data.metadata.filter(row => {
+        return row.id == val;
+    })
+    var idSample = data.samples.filter(row => {
+        return row.id === selectID
+    })[0]
+    var idDemo = data.metadata.filter(row => {
+        return row.id === selectID
+    })[0]
+    console.log(filteredData);
+    buildBarChart(idSample);
+    buildBubbleChart(idSample);
+    buildDemoInfo(filteredData);
+    buildGauge(idDemo);
+};
