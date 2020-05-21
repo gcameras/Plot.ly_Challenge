@@ -76,7 +76,7 @@ function buildBubbleChart(data) {
 
     // Set the layout
     var layout = {
-        title: 'Sample Bubble Chart',
+        title: 'OTU ID Sample Values',
     };
 
     //Plot using plotly
@@ -84,10 +84,8 @@ function buildBubbleChart(data) {
 };
 
 ///**** POPULATE DEMOGRAPHIC INFO ****///
-
 function buildDemoInfo(data) {
     var demoBox = d3.select("#sample-metadata");
-    console.log(data)
     Object.entries(data).forEach(([key, value]) => {
         var row = demoBox.append("p");
         row.text(`${key}: ${value}`);
@@ -95,17 +93,15 @@ function buildDemoInfo(data) {
 };
 
 ///**** BUILD GAUGE ****///
-
 function buildGauge(data) {
     // Define the variable
     var w_freq = data.wfreq
-    console.log(w_freq)
 
     //Plot the data
     var data = [{
         domain: { x: [0, 1], y: [0, 1] },
         value: w_freq,
-        title: { text: "Washing Frequency: Scrubs/Week" },
+        title: { text: "Belly Button Washing Frequency</b><br>Scrubs per Week" },
         type: "indicator",
         mode: "gauge+number",
         gauge: {
@@ -133,21 +129,17 @@ function buildGauge(data) {
     Plotly.newPlot('gauge', data, layout);
 }
 
-// Function to change when a new ID is selected
+// Function to change when a new ID is selected from drop down
 async function optionChanged(data) {
     var data = await d3.json("./samples.json");
     console.log(data);
     var selectID = d3.select("#selDataset").node().value;
-    console.log(selectID)
     var idSample = data.samples.filter(row => {
         return row.id == selectID
     })[0]
-    console.log(idSample)
     var idDemo = data.metadata.filter(row => {
         return row.id == +selectID
     })[0]
-    console.log(idDemo)
-    console.log(idSample);
     var sample_metadata = d3.select("#sample-metadata");
     sample_metadata.html("");
     buildBarChart(idSample);
